@@ -1,4 +1,4 @@
-FROM ubuntu:12.04
+FROM jpetazzo/dind
 
 MAINTAINER Quinten Krijger "https://github.com/Krijger"
 
@@ -17,3 +17,7 @@ RUN mkdir -p /var/log/supervisor
 RUN mkdir -p /etc/supervisor/conf.d
 
 ADD supervisor.conf /etc/supervisor.conf
+ADD docker.sv.conf /etc/supervisor/conf.d
+
+ENTRYPOINT ["/usr/local/bin/supervisord"]
+CMD ["-c", "/etc/supervisor.conf"]
